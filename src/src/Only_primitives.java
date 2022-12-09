@@ -5,13 +5,25 @@ public class Only_primitives {
     public boolean bool;
     public double db;
 
+    public float fl;
 
+    public byte bt;
 
-    public Only_primitives(int id, char ch, boolean bool, double db) {
+    public long ln;
+
+    public Only_primitives(int id, char ch, boolean bool, double db, float fl, byte bt, long ln) {
         this.id = id;
         this.ch = ch;
         this.bool = bool;
         this.db = db;
+        this.fl = fl;
+        this.bt = bt;
+        this.ln = ln;
+    }
+
+
+    public Only_primitives(){
+
     }
 
     public int getId() {
