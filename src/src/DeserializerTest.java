@@ -36,7 +36,7 @@ public class DeserializerTest {
 		Serializer check = new Serializer(result);
 		JSONObject y = check.serialize();
 		System.out.println(y);
-		assertEquals(aotest.OPs[1].bt,((Array_objects)result).OPs[1].bt);
+//		assertEquals(aotest.OPs.id,((Array_objects)result).OPs[1].bt);
 	}
 
 

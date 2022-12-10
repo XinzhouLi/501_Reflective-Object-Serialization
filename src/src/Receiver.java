@@ -1,36 +1,74 @@
+import org.json.JSONObject;
+
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
-public class Receiver {
+public class Receiver extends Thread{
+	private ServerSocket serverSocket;
 
-	private Thread t;
-	private String message;
+	public Receiver(int port) throws IOException
+	{
+		serverSocket = new ServerSocket(port);
+		serverSocket.setSoTimeout(300000);
+	}
 
-	public void start () {
+	public void run()
+	{
+		while(true)
+		{
+			try
+			{
+				System.out.println("Wait for connection, port#：" + serverSocket.getLocalPort() + "...");
+				Socket server = serverSocket.accept();
+				System.out.println("Sender ip address：" + server.getRemoteSocketAddress());
+				// recive the message
+				DataInputStream in = new DataInputStream(server.getInputStream());
+				String input = in.readUTF();
+				System.out.println(input);
+				Deserializer deser = new Deserializer(input);
+				Object result = deser.deserialized();
+				Serializer ser = new Serializer(result);
+				JSONObject output = ser.serialize();
+				System.out.println(output.toString());
 
-		if (t == null) {
-			t = new Thread ((Runnable) this, "2");
-			t.start ();
+
+				server.close();
+			}catch(SocketTimeoutException s)
+			{
+				System.out.println("Socket timed out!");
+				break;
+			}catch(IOException e)
+			{
+				e.printStackTrace();
+				break;
+			} catch (NoSuchFieldException e) {
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			} catch (InvocationTargetException e) {
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			} catch (InstantiationException e) {
+				throw new RuntimeException(e);
+			} catch (NoSuchMethodException e) {
+				throw new RuntimeException(e);
+			}
 		}
 	}
-	public String run() {
-		try {
-			ServerSocket ss = new ServerSocket(8888);
-			System.out.println("Init Receiver....");
-			Socket s = ss.accept();
-			System.out.println("Receiver:"+s.getInetAddress().getLocalHost()+"connected to sender");
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-			//读取客户端发送来的消息
-			String mess = br.readLine();
-			System.out.println("sender："+mess);
-			return mess;
-		} catch (IOException e) {
+	public static void main(String [] args)
+	{
+		int port = 6066;
+		try
+		{
+			Thread t = new Receiver(port);
+			t.run();
+		}catch(IOException e)
+		{
 			e.printStackTrace();
 		}
-		return "nothing get";
 	}
-
-
 }

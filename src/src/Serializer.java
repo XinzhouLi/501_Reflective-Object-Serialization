@@ -12,20 +12,24 @@ public class Serializer {
 
 	JSONObject root = new JSONObject();
 	JSONArray rootArray = new JSONArray();
-	private final Object incomeO;
+	private Object incomeO;
 
 	public Serializer(Object O) {
 		incomeO = O;
 	}
-
+	public Serializer() {
+	}
+	public void init(Object O){
+		incomeO = O;
+	}
 	public static void main(String[] args) throws IllegalAccessException {
-		Only_primitives test = new Only_primitives(1, 'c', true, 0.11, (float) 0.22, (byte) 0x56, 1561);
+/*		Only_primitives test = new Only_primitives(1, 'c', true, 0.11, (float) 0.22, (byte) 0x56, 1561);
 		Array_primitives Atest = new Array_primitives(new int[]{1, 2, 4, 5, 6}, new float[]{(float) 0.1, (float) 0.2, (float) 0.3});
 		Only_object Ootest = new Only_object();
 		Array_objects AOtest = new Array_objects();
 		Serializer ser = new Serializer(Ootest);
 		JSONObject x = ser.serialize();
-		System.out.println(x);
+		System.out.println(x);*/
 
 	}
 

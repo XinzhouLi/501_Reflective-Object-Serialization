@@ -43,7 +43,7 @@ public class SerializerTest {
 	@Test
 	public void serPrimitiveArray() throws IllegalAccessException {
 		JSONObject jb = new JSONObject();
-		Array_primitives ao = new Array_primitives(new int[]{1, 2, 4, 5, 6}, new float[]{(float) 0.1, (float) 0.2, (float) 0.3});
+		Array_primitives ao = new Array_primitives(true);
 		Serializer se = new Serializer(ao);
 		jb = se.serialize();
 		assertEquals(jb.toString(), "{\"Object\":[{\"entries\":[{\"value\":1},{\"value\":2},{\"value\":4},{\"value\":5},{\"value\":6}],\"length\":5,\"id\":2101440631,\"type\":\"array\",\"class\":\"class [I\"},{\"entries\":[{\"value\":0.1},{\"value\":0.2},{\"value\":0.3}],\"length\":3,\"id\":2109957412,\"type\":\"array\",\"class\":\"class [F\"},{\"field\":[{\"declaringclass\":\"class [I\",\"reference\":2101440631,\"name\":\"its\"},{\"declaringclass\":\"class [F\",\"reference\":2109957412,\"name\":\"fls\"},{\"declaringclass\":\"class [F\",\"name\":\"nl\",\"value\":\"null\"}],\"id\":901506536,\"type\":\"object\",\"class\":\"Array_primitives\"}]}");

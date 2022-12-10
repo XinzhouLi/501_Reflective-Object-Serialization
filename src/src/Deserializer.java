@@ -20,9 +20,12 @@ public class Deserializer {
 	}
 
 	public static void main(String[] args) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-		Only_primitives test = new Only_primitives(1,'c',true,0.11, (float) 0.22, (byte) 123, 1516);
-		Only_object otest = new Only_object(true);
-		Array_primitives aptest = new Array_primitives(new int[]{1, 2, 4, 5, 6}, new float[]{(float) 0.1, (float) 0.2, (float) 0.3});
+		Only_object otest = new Only_object();
+		otest.init();
+
+/*		Only_primitives test = new Only_primitives(1,'c',true,0.11, (float) 0.22, (byte) 123, 1516);
+//		Only_object otest = new Only_object(true);
+		Array_primitives aptest = new Array_primitives(true);
 		Array_objects aotest = new Array_objects(true);
 		Collection_object ctest = new Collection_object(true);
 		Serializer ser = new Serializer(ctest);
@@ -34,7 +37,7 @@ public class Deserializer {
 
 		Serializer check = new Serializer(result);
 		JSONObject y = check.serialize();
-		System.out.println(y);
+		System.out.println(y);*/
 	}
 	public Object deserialized() throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
 
