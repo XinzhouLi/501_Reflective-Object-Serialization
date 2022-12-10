@@ -18,7 +18,7 @@ public class Array_primitives {
 	}
 
 	public void init(){
-		System.out.println("How many int element want to put:");
+		System.out.println("How many int element want to put in int array:");
 		int num = Integer.parseInt(inputData());
 		int[] temp = (int[]) Array.newInstance(int.class, num);
 		for (int i = 0; i < num; i++) {
@@ -27,13 +27,13 @@ public class Array_primitives {
 			Array.setInt(temp, i, n);
 		}
 		its = temp;
-		System.out.println("How many float element want to put:");
+		System.out.println("How many float element want to put float array:");
 		int num1 = Integer.parseInt(inputData());
 		float[] temp1 = (float[]) Array.newInstance(float.class, num);
-		for (int i = 0; i < num; i++) {
-			System.out.println("input an int");
+		for (int i = 0; i < num1; i++) {
+			System.out.println("input an float");
 			float n = Float.parseFloat(inputData());
-			Array.setFloat(temp, i, n);
+			Array.setFloat(temp1, i, n);
 		}
 		fls = temp1;
 	}
@@ -44,7 +44,6 @@ public class Array_primitives {
 		if(scan.hasNext()){
 			str = scan.next();
 		}
-		scan.close();
 		return str;
 	}
 }

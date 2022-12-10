@@ -39,7 +39,7 @@ public class Collection_object {
 		if(scan.hasNext()){
 			str = scan.next();
 		}
-		scan.close();
+
 		return str;
 	}
 }

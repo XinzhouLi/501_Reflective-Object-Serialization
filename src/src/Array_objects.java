@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
@@ -16,6 +18,7 @@ public class Array_objects {
 				};
 	}
 	public void init(){
+		System.out.println("How many element you want to put in array");
 		int num = Integer.parseInt(inputData());
 		ArrayList<Just_object> temp = new ArrayList<Just_object>();
 		for (int i = 0; i < num; i++) {
@@ -23,7 +26,9 @@ public class Array_objects {
 			t.init();
 			temp.add(t);
 		}
-		OPs = (Just_object[]) temp.toArray();
+		System.out.println(temp.toArray().getClass().getTypeName());
+		Just_object[] t = new Just_object[num];
+		OPs = temp.toArray(t);
 	}
 	public String inputData(){
 		Scanner scan = new Scanner(System.in);
@@ -31,7 +36,6 @@ public class Array_objects {
 		if(scan.hasNext()){
 			str = scan.next();
 		}
-		scan.close();
 		return str;
 	}
 }

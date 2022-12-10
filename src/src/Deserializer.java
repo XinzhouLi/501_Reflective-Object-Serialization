@@ -20,8 +20,9 @@ public class Deserializer {
 	}
 
 	public static void main(String[] args) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-		Only_object otest = new Only_object();
-		otest.init();
+
+
+
 
 /*		Only_primitives test = new Only_primitives(1,'c',true,0.11, (float) 0.22, (byte) 123, 1516);
 //		Only_object otest = new Only_object(true);
@@ -133,7 +134,8 @@ public class Deserializer {
 					Array.set(ins, i, temp);
 				}
 				ret = ins;
-				System.out.println("sb");
+
+
 			}
 
 

@@ -1,7 +1,7 @@
 public class Only_object {
 
-	public Just_object p1;
-	public Just_object p2;
+	public Just_object p1 = new Just_object();
+	public Just_object p2 = new Just_object();
 
 
 	public Only_object() {
@@ -13,5 +13,7 @@ public class Only_object {
 	public void init(){
 		p1.init();
 		p2.init();
+
 	}
+
 }

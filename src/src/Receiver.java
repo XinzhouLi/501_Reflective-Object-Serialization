@@ -21,22 +21,30 @@ public class Receiver extends Thread{
 		{
 			try
 			{
-				System.out.println("Wait for connection, port#：" + serverSocket.getLocalPort() + "...");
-				Socket server = serverSocket.accept();
-				System.out.println("Sender ip address：" + server.getRemoteSocketAddress());
-				// recive the message
-				DataInputStream in = new DataInputStream(server.getInputStream());
-				String input = in.readUTF();
-				System.out.println(input);
-				Deserializer deser = new Deserializer(input);
-				Object result = deser.deserialized();
-				Serializer ser = new Serializer(result);
-				JSONObject output = ser.serialize();
-				System.out.println(output.toString());
 
 
-				server.close();
-			}catch(SocketTimeoutException s)
+					System.out.println("Wait for connection, port#：" + serverSocket.getLocalPort() + "...");
+					Socket server = serverSocket.accept();
+					System.out.println("Sender ip address：" + server.getRemoteSocketAddress());
+					// recive the message
+				while (true) {
+					DataInputStream in = new DataInputStream(server.getInputStream());
+					String input = in.readUTF();
+
+					System.out.println("input JSON serializer Object: "+input);
+					Deserializer deser = new Deserializer(input);
+					Object result = deser.deserialized();
+					Serializer ser = new Serializer(result);
+					JSONObject output = ser.serialize();
+					System.out.println("output JSON deserializer Object : "+output.toString());
+				}
+
+
+			}
+			catch (EOFException f){
+				break;
+			}
+			catch(SocketTimeoutException s)
 			{
 				System.out.println("Socket timed out!");
 				break;

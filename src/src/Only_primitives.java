@@ -37,20 +37,24 @@ public class Only_primitives {
 
     }
     public void init(){
+        Scanner scan = new Scanner(System.in);
+
         System.out.println("Set value for int id");
-        this.id = Integer.parseInt(inputData());
+
+        this.id = Integer.parseInt(scan.next());
         System.out.println("Set value for char ch");
-        ch = inputData().charAt(0);
+        ch = scan.next().charAt(0);
         System.out.println("Set value for boolean bool");
-        bool = Boolean.parseBoolean(inputData());
+        bool = Boolean.parseBoolean(scan.next());
         System.out.println("Set value for double db");
-        db = Double.parseDouble(inputData());
+        db = Double.parseDouble(scan.next());
         System.out.println("Set value for float fl");
-        fl = Float.parseFloat(inputData());
+        fl = Float.parseFloat(scan.next());
         System.out.println("Set value for byte bt");
-        bt = Byte.parseByte(inputData());
+        bt = Byte.parseByte(scan.next());
         System.out.println("Set value for long ln");
-        ln = Long.parseLong(inputData());
+        ln = Long.parseLong(scan.next());
+
     }
     public String inputData(){
         Scanner scan = new Scanner(System.in);
@@ -58,7 +62,7 @@ public class Only_primitives {
         if(scan.hasNext()){
             str = scan.next();
         }
-        scan.close();
+
         return str;
     }
 }

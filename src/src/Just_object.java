@@ -13,18 +13,14 @@ public class Just_object {
 	}
 
 	public void init (){
-		System.out.println("set value for id");
-		id = Integer.parseInt(inputData());
-		System.out.println("set value for message");
-		message = Boolean.parseBoolean(inputData());
-	}
-	public String inputData(){
 		Scanner scan = new Scanner(System.in);
-		String str = new String();
-		if(scan.hasNext()){
-			str = scan.next();
-		}
-		scan.close();
-		return str;
+		System.out.println("set value for int id");
+		String t = scan.next();
+		id = Integer.parseInt(t);
+		System.out.println("set value for boolean message");
+		t= scan.next();
+		message = Boolean.parseBoolean(t);
+
 	}
+
 }
