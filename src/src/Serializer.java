@@ -1,7 +1,7 @@
-import com.alibaba.fastjson.JSON;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import com.google.gson.Gson;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -23,13 +23,10 @@ public class Serializer {
 		incomeO = O;
 	}
 	public static void main(String[] args) throws IllegalAccessException {
-/*		Only_primitives test = new Only_primitives(1, 'c', true, 0.11, (float) 0.22, (byte) 0x56, 1561);
-		Array_primitives Atest = new Array_primitives(new int[]{1, 2, 4, 5, 6}, new float[]{(float) 0.1, (float) 0.2, (float) 0.3});
-		Only_object Ootest = new Only_object();
-		Array_objects AOtest = new Array_objects();
-		Serializer ser = new Serializer(Ootest);
+		Collection_object co = new Collection_object(true);
+		Serializer ser = new Serializer(co);
 		JSONObject x = ser.serialize();
-		System.out.println(x);*/
+		System.out.println(x);
 
 	}
 
@@ -57,11 +54,12 @@ public class Serializer {
 
 		for (Field fd : o.getClass().getDeclaredFields()) {
 			if (Collection.class.isAssignableFrom(fd.getType()) == true){
-				com.alibaba.fastjson.JSONObject serC = new com.alibaba.fastjson.JSONObject();
+				System.out.println(fd.getType().getTypeName());
+				Gson serC = new Gson();
 				JSONObject temp = new JSONObject();
 				temp.put("class", fd.getType().getTypeName());
 				temp.put("name", fd.getName());
-				temp.put("obj", serC.get("value"));
+				temp.put("obj", (String)serC.toJson(fd.get(o)));
 				field.put(temp);
 			}
 			else if (fd.get(o) == null) {

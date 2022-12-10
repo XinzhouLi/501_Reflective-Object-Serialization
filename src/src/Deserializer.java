@@ -1,12 +1,12 @@
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 public class Deserializer {
@@ -20,25 +20,12 @@ public class Deserializer {
 	}
 
 	public static void main(String[] args) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-
-
-
-
-/*		Only_primitives test = new Only_primitives(1,'c',true,0.11, (float) 0.22, (byte) 123, 1516);
-//		Only_object otest = new Only_object(true);
-		Array_primitives aptest = new Array_primitives(true);
-		Array_objects aotest = new Array_objects(true);
-		Collection_object ctest = new Collection_object(true);
-		Serializer ser = new Serializer(ctest);
+		Collection_object co = new Collection_object(true);
+		Serializer ser = new Serializer(co);
 		JSONObject x = ser.serialize();
-		System.out.println("income: "+x.toString());
+		Deserializer dx = new Deserializer(x.toString());
+		dx.deserialized();
 
-		Deserializer deser = new Deserializer(x.toString());
-		Object result = deser.deserialized();
-
-		Serializer check = new Serializer(result);
-		JSONObject y = check.serialize();
-		System.out.println(y);*/
 	}
 	public Object deserialized() throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
 
@@ -67,6 +54,14 @@ public class Deserializer {
 					// handle the object
 					// need to handle collection in hear
 
+					if (((JSONObject) i).get("class").equals("java.util.ArrayList") ){
+
+						Type arrlisttype = new TypeToken<List<String>>() {}.getType();
+						Gson gson = new Gson();
+						List<String> alist = gson.fromJson((String) ((JSONObject)i).get("obj"), arrlisttype);
+						ret = alist;
+						continue;
+					}
 					//find the corresponded JSON object
 					int refId = jfd.getInt("reference");
 					JSONObject jref = new JSONObject();
