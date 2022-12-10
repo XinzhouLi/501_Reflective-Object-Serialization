@@ -10,4 +10,6 @@ public class Array_primitives {
 		fls = fl;
 	}
 
+	public Array_primitives() {
+	}
 }

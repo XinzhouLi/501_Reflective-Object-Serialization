@@ -55,7 +55,7 @@ public class Serializer {
 			if (Collection.class.isAssignableFrom(fd.getType()) == true){
 				com.alibaba.fastjson.JSONObject serC = new com.alibaba.fastjson.JSONObject();
 				JSONObject temp = new JSONObject();
-				temp.put("class", fd.getType());
+				temp.put("class", fd.getType().getTypeName());
 				temp.put("name", fd.getName());
 				temp.put("obj", serC.get("value"));
 				field.put(temp);
@@ -80,7 +80,7 @@ public class Serializer {
 					serObj = serObjArray(fd, oa);
 				}
 				ref.put("name", fd.getName());
-				ref.put("declaringclass", fd.getType());
+				ref.put("declaringclass", fd.getType().getTypeName());
 				ref.put("reference", serObj.get("id"));
 				field.put(ref);
 				rootArray.put(serObj);
@@ -90,7 +90,7 @@ public class Serializer {
 				JSONObject ref = new JSONObject();
 				JSONObject serObj = serObj(obj);
 				ref.put("name", fd.getName());
-				ref.put("declaringclass", fd.getType());
+				ref.put("declaringclass", fd.getType().getTypeName());
 				ref.put("reference", serObj.get("id"));
 				field.put(ref);
 				rootArray.put(serObj);
@@ -106,7 +106,7 @@ public class Serializer {
 
 	public JSONObject serObjArray(Field fd, Object[] oa) throws IllegalAccessException {
 		JSONObject ret = new JSONObject();
-		ret.put("class", fd.getType());
+		ret.put("class", fd.getType().getTypeName());
 		ret.put("type", "array");
 		ret.put("length", oa.length);
 		JSONArray en = new JSONArray();
@@ -126,7 +126,7 @@ public class Serializer {
 	public JSONObject serPrimitiveArray(Field fd, JSONArray ja) throws IllegalAccessException {
 
 		JSONObject ret = new JSONObject();
-		ret.put("class", fd.getType());
+		ret.put("class", fd.getType().getTypeName());
 		ret.put("type", "array");
 		ret.put("length", ja.length());
 		JSONArray en = new JSONArray();
@@ -156,7 +156,7 @@ public class Serializer {
 
 		JSONObject temp = new JSONObject();
 		temp.put("name", fd.getName());
-		temp.put("declaringclass", fd.getType());
+		temp.put("declaringclass", fd.getType().getTypeName());
 		temp.put("value", getValue(fd, o));
 
 		return temp;
@@ -166,7 +166,7 @@ public class Serializer {
 	public JSONObject serNull(Field fd) {
 		JSONObject temp = new JSONObject();
 		temp.put("name", fd.getName());
-		temp.put("declaringclass", fd.getType());
+		temp.put("declaringclass", fd.getType().getTypeName());
 		temp.put("value", "null");
 		return temp;
 	}
